@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useState} from 'react'
+import './App.css'
+import {newsApi} from './api/api'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    const [stateId, setStateId] = useState<Array<any> | null>(null)
+    const [stateNews, setStateNews] = useState<Array<any>>([])
+
+    // console.log('stateId', stateId)
+    console.log('stateNews: ', stateNews)
+
+    useEffect(() => {
+        newsApi.getIds()
+            .then(res => {
+                setStateId(res)
+            })
+    }, [])
+
+    useEffect(() => {
+        stateId && stateId.map(el => {
+            newsApi.getNews(el)
+                .then(res => {
+                    // console.log(res)
+                    setStateNews([...stateNews, res])
+                })
+        })
+    }, [stateId])
+
+    return (
+        <div className="App">
+            <h1>News:</h1>
+            <div>Here will be last 5 news</div>
+            {stateId && stateId.map((el: any, i:number) => <div key={i}>{el}</div>)}
+            {stateNews && stateNews.map((el, i) => <div key={i}> id: {el.id}, title: {el.title}</div>)}
+        </div>
+    )
 }
 
-export default App;
+export default App
