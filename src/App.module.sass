@@ -8,8 +8,14 @@ h1
 	display: flex
 	justify-content: space-between
 	align-items: center
+	@media only screen and (max-width: 550px)
+		flex-direction: column
 	.firstPart
-		width: 70%
+		width: 60%
+		@media only screen and (max-width: 720px)
+			width: 50%
+		@media only screen and (max-width: 550px)
+			width: 100%
 		.index
 			display: inline-block
 			width: 22px
@@ -22,7 +28,20 @@ h1
 		a:hover
 			text-decoration: underline
 	.secondPart
-		width: 30%
+		width: 20%
+		text-align: center
+		@media only screen and (max-width: 720px)
+			width: 25%
+		@media only screen and (max-width: 550px)
+			width: 100%
+		.stars
+			color: red
+	.thirdPart
+		width: 20%
+		@media only screen and (max-width: 720px)
+			width: 25%
+		@media only screen and (max-width: 550px)
+			width: 100%
 		.author
 			& span
 				color: red

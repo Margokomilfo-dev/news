@@ -35,7 +35,6 @@ export const newsApi = {
     },
     getUser(name:string) {
         return instance.get<UserType>(`user/${name}.json?print=pretty`,).then(response => {
-            debugger
             return response.data
         })
     }

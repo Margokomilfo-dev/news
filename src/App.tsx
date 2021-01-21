@@ -26,7 +26,6 @@ function AppModule() {
                     })
                     .then(res => {
                         newsApi.getUser(res.by).then((res) => {
-                            debugger
                             setUsersState(state => [...state, res])
                         })
                     })
@@ -54,6 +53,16 @@ function AppModule() {
                         </div>
                     </div>
                     <div className={s.secondPart}>
+                         <span className={s.stars}>
+                               {el.score === 1 ? <span>&#9733;</span> :
+                                   el.score === 2 ? <span>&#9733;&#9733;</span> :
+                                       el.score === 3 ? <span>&#9733;&#9733;&#9733;</span> :
+                                           el.score === 4 ? <span>&#9733;&#9733;&#9733;&#9733;</span> :
+                                               <span>&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                               }
+                            </span>
+                    </div>
+                    <div className={s.thirdPart}>
                         <span className={s.author}> by <span>{el.by}</span></span>
                     </div>
                 </div>)}
